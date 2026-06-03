@@ -1,0 +1,37 @@
+# ============================================================
+# CityFix — docker-compose.yml
+# Monta volúmenes, aísla node_modules e inyecta DNS de Google
+# ============================================================
+
+version: "3.9"
+
+services:
+  cityfix:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    # ── Nombre del contenedor para referencia fácil ──────────
+    container_name: cityfix_app
+
+    # ── Variables de entorno ──────────────────────────────────
+    # Reemplaza estos valores con los de TU proyecto Supabase
+    environment:
+      - SUPABASE_URL=https://TU_PROJECT_ID.supabase.co
+      - SUPABASE_ANON_KEY=TU_ANON_KEY_PUBLICA
+
+    # ── Volúmenes ─────────────────────────────────────────────
+    volumes:
+      # Monta el código fuente del host dentro del contenedor
+      - .:/app
+      # Aísla node_modules interno para evitar conflictos con el host
+      - /app/node_modules
+
+    # ── DNS de Google (evita bloqueos de red institucionales) ─
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+    # ── Modo interactivo para ver output de Jest en tiempo real
+    stdin_open: true
+    tty: true

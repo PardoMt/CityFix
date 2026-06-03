@@ -1,0 +1,19 @@
+{
+  "name": "cityfix",
+  "version": "1.0.0",
+  "description": "App de reporte de daños de infraestructura urbana con integración Supabase",
+  "main": "src/utils/reportEngine.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
